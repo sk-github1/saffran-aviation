@@ -1,0 +1,29 @@
+pipeline {
+  agent any
+  environment {
+    IMAGE = "${env.IMAGE_URI}" // Set IMAGE_URI in Jenkins credentials or job config
+  }
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
+    stage('Build') {
+      steps {
+        sh 'docker build -t ${IMAGE} .'
+      }
+    }
+    stage('Push') {
+      steps {
+        // login to ECR (or DockerHub) should be handled via credentials
+        sh 'docker push ${IMAGE}'
+      }
+    }
+    stage('Deploy') {
+      steps {
+        sh 'kubectl apply -f k8s/ --namespace saffaran'
+      }
+    }
+  }
+}

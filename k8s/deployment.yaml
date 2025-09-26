@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: saffaran-api
+  namespace: saffaran
+  labels:
+    app: saffaran-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: saffaran-api
+  template:
+    metadata:
+      labels:
+        app: saffaran-api
+    spec:
+      containers:
+      - name: saffaran-api
+        image: <YOUR_REGISTRY>/saffaran-api:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+        - name: S3_BUCKET
+          valueFrom:
+            secretKeyRef:
+              name: saffaran-secrets
+              key: s3_bucket
+        - name: REDIS_HOST
+          valueFrom:
+            secretKeyRef:
+              name: saffaran-secrets
+              key: redis_host
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: saffaran-secrets
+              key: redis_password
+        - name: AWS_REGION
+          value: us-east-1
+      imagePullSecrets:
+      - name: regcred

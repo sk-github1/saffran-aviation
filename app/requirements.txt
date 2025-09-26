@@ -1,0 +1,4 @@
+flask==2.2.5
+boto3==1.26.0
+redis==4.5.1
+gunicorn==20.1.0

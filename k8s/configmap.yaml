@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: saffaran-config
+  namespace: saffaran
+data:
+  LOG_LEVEL: "INFO"

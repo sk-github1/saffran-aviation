@@ -1,0 +1,11 @@
+{
+  "engine_id": "ENG-ABC-1234",
+  "flight_id": "FL-20250926-001",
+  "timestamp": "2025-09-26T10:00:00Z",
+  "sensors": {
+    "temp_c": 720.5,
+    "rpm": 12250,
+    "vibration_g": 0.032
+  },
+  "notes": "Periodic maintenance telemetry sample"
+}
